@@ -25,8 +25,8 @@ FORGIT="$FORGIT_INSTALL_DIR/bin/git-forgit"
 unexported_vars=0
 # Set posix mode in bash to only get variables, see #256.
 [[ -n "$BASH_VERSION" ]] && set -o posix
-set | awk -F '=' '{ print $1 }' | grep FORGIT_ | while read -r var; do
-    if ! export | grep -q "\(^$var=\|^export $var=\)"; then
+set | awk -F '=' '{ print $1 }' | command grep FORGIT_ | while read -r var; do
+    if ! export | command grep -q "\(^$var=\|^export $var=\)"; then
         if [[ $unexported_vars == 0 ]]; then
             forgit::warn "Config options have to be exported in future versions of forgit."
             forgit::warn "Please update your config accordingly:"
